@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="utf-8"?>
+<repository xmlns:x="rpa://selector/core" xmlns:regex="rpa://selector/operator/regex" xmlns:wildcard="rpa://selector/operator/wildcard" xmlns:contains="rpa://selector/operator/contains" xmlns:notContains="rpa://selector/operator/notContains" xmlns:startsWith="rpa://selector/operator/startsWith" xmlns:notStartsWith="rpa://selector/operator/notStartsWith" xmlns:endsWith="rpa://selector/operator/endsWith" xmlns:notEndsWith="rpa://selector/operator/notEndsWith" xmlns:notEquals="rpa://selector/operator/notEquals" xmlns:greaterThan="rpa://selector/operator/greaterThan" xmlns:greaterThanOrEqual="rpa://selector/operator/greaterThanOrEqual" xmlns:lessThan="rpa://selector/operator/lessThan" xmlns:lessThanOrEqual="rpa://selector/operator/lessThanOrEqual">
+  <group id="edd5cf35-8e74-47d5-ade8-0fa1be101bb4" name="店小秘--添加商品" type="Web" processName="chrome" icon=".dev\icon\46ecc51d-bef3-4241-ba7d-22ddca22e6b7.png" criteria="https://www.dianxiaomi.com">
+    <selector id="990bfa5e-b01a-4918-b2a5-0d2986c42ddc" name="输入框_proSku" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\a8615b5d-2478-4798-821f-70feb7be3487.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="goodsInfo" class="head-tab-pane headtabpane" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="goods-edit product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="module-content-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="table">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional index="1" index-of-type="1" />
+      </web>
+      <web x:name="td">
+        <optional class="w500" index="1" index-of-type="1" />
+      </web>
+      <web x:name="span">
+        <optional class="ipt-span-in s-w50 w300" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" id="proSku" type="text">
+        <optional maxlength="50" placeholder="支持字母 数字和英文符号" oninput="DXMGOODS.getProSkuNum(this);" class="form-component" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="102c630b-2afe-469e-9760-dfaa8b776d04" name="输入框_proName" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\853cd978-6785-449b-a86d-06dc8bd965e9.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="goodsInfo" class="head-tab-pane headtabpane" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="goods-edit product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="module-content-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="table">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional index="5" index-of-type="5" />
+      </web>
+      <web x:name="td">
+        <optional colspan="2" index="1" index-of-type="1" />
+      </web>
+      <web x:name="span">
+        <optional class="ipt-span-in s-w100 w-full" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" id="proName" type="text">
+        <optional maxlength="1024" onkeyup="DXMGOODS.checkInputNum(this);" class="form-component" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="8a4dedc6-b088-4312-8082-d7c016aaff43" name="输入框_proNameEn" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\9111a8ae-bc90-4008-abef-800d74ebafbc.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="goodsInfo" class="head-tab-pane headtabpane" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="goods-edit product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="module-content-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="table">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional index="6" index-of-type="6" />
+      </web>
+      <web x:name="td">
+        <optional colspan="2" index="1" index-of-type="1" />
+      </web>
+      <web x:name="span">
+        <optional class="ipt-span-in s-w100 w-full" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" id="proNameEn" type="text">
+        <optional maxlength="1024" oninput="clearCJK(this);DXMGOODS.checkInputNum(this)" class="form-component" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="fd2ed9ea-1e3f-474d-a98a-20adfb380d5f" name="输入框_sourceUrl" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\f3d2bb41-45fa-4418-9121-579e57d4baaf.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="goodsInfo" class="head-tab-pane headtabpane" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="2" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="table">
+        <optional uid="sourceUrl" class="module-content-table" index="0" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional class="sourceurlmarktr" index="0" index-of-type="0" />
+      </web>
+      <web x:name="td">
+        <optional index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="input-group" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" type="text" name="sourceUrl">
+        <optional placeholder="https://" value="" class="form-control" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="9a68f864-37df-46bc-a398-8197ff995c2d" name="选择图片" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\36e546e3-e648-4876-a2a1-0dea698deaee.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="goodsInfo" class="head-tab-pane headtabpane" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="localPic" class="product-info-module" index="3" index-of-type="2" />
+      </web>
+      <web x:name="div">
+        <optional id="uploader" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="queuelist wu-example" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module-content" index="2" index-of-type="2" />
+      </web>
+      <web x:name="div">
+        <optional class="img-ctr-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="img-ctr-head" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="pull-left" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="addimgdropdown btn-dropdown dropdown inline-block mright10" index="1" index-of-type="0" />
+      </web>
+      <web x:name="button" type="button" class="btn btn-gray button">
+        <optional data-toggle="dropdown" aria-expanded="false" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="ae02e9e8-b02d-47b9-9833-fb58dc1c4922" name="文本框_webImgUrl" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\488d1378-f0c4-4a2e-92db-566f1ae3ddf1.jpg">
+      <web x:name="div">
+        <optional id="imgWebModal" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="static" data-keyboard="false" class="in modal modal-new normal" index="91" index-of-type="55" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-dialog" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-content" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-body tab-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="mtop10" index="0" index-of-type="0" />
+      </web>
+      <web x:name="textarea" id="webImgUrl">
+        <optional placeholder="请填写图片URL地址，多个地址用回车换行" class="form-component m-h200" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="95607d57-6748-46af-899b-cc98f332462c" name="添加" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\e1920b13-738f-431f-8c74-1cfd44ede2c0.jpg">
+      <web x:name="div">
+        <optional id="imgWebModal" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="static" data-keyboard="false" class="in modal modal-new normal" index="91" index-of-type="55" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-dialog" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-content" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-footer" index="2" index-of-type="2" />
+      </web>
+      <web x:name="button" type="button" innerText="添加" xbox-display="true">
+        <optional onclick="addWebUrl();" class="btn-determine button" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="dbe68874-e08a-44f9-8b4b-35108300c3ab" name="全部仓库" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\e9b7df5b-3684-4bd3-b71f-0ac9ae3ed9a4.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="goodsInfo" class="head-tab-pane headtabpane" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="6" index-of-type="5" />
+      </web>
+      <web x:name="div">
+        <optional class="goods-edit p-bottom20 p-top20 product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="initrepository module-content-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="m-left20" index="0" index-of-type="0" />
+      </web>
+      <web x:name="label">
+        <optional class="init-repository" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" type="checkbox" name="warehouse">
+        <optional value="all" index="0" index-of-type="0" />
+      </web>
+      <anchor text="全部仓库" targetRectangle="[476,666,13,13]" anchorRectangle="[476,660,170,23]" version="1" threshold="0.6" />
+    </selector>
+    <selector id="be6fd764-7c0a-4de3-901f-4e95cb14c4ec" name="物流与包装" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\39d8d07f-4aa0-4a1e-b27a-e16422814c72.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="in-container m-bottom12 p0-imp" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="in-screen-single p-bottom0 p-top0" index="0" index-of-type="0" />
+      </web>
+      <web x:name="ul">
+        <optional class="borderbtmno head-tab-nav headtabnav top-nav" index="0" index-of-type="0" />
+      </web>
+      <web x:name="li" innerText="物流与包装">
+        <optional uid="logisticsPackaging" class="borderbtmno" index="1" index-of-type="1" />
+      </web>
+    </selector>
+    <selector id="568ef935-3482-4e4a-8f5b-e170637d984d" name="输入框_nameCn" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\e04157c1-6c31-4a6a-a904-490abcd78a65.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="logisticsPackaging" class="head-tab-pane headtabpane m-top10" index="2" index-of-type="2" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="goods-edit product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="module-content-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="table">
+        <optional class="w-full" index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="td">
+        <optional index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="span">
+        <optional class="ipt-span-in s-w50 w300" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" id="nameCn" type="text">
+        <optional data-required="0" maxlength="50" onkeyup="DXMGOODS.checkInputNum(this);" class="form-component" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="9dee24ba-5ba9-49ac-816a-479dfa3220f7" name="输入框_nameEn" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\00afb4b7-9791-4490-9021-3ff48a108a27.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="logisticsPackaging" class="head-tab-pane headtabpane m-top10" index="2" index-of-type="2" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="goods-edit product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="module-content-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="table">
+        <optional class="w-full" index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional index="1" index-of-type="1" />
+      </web>
+      <web x:name="td">
+        <optional index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="span">
+        <optional class="ipt-span-in s-w50 w300" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" id="nameEn" type="text">
+        <optional data-required="0" maxlength="50" oninput="clearCJK(this);DXMGOODS.checkInputNum(this);" class="form-component" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="89359fef-d0a7-4c95-9218-1c0a14cb870c" name="输入框_cusPrice" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\5fc679c6-c4a5-4f1a-bfa3-3de938c6dd41.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="logisticsPackaging" class="head-tab-pane headtabpane m-top10" index="2" index-of-type="2" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="goods-edit product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="module-content-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="table">
+        <optional class="w-full" index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional index="2" index-of-type="2" />
+      </web>
+      <web x:name="td">
+        <optional index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="span">
+        <optional class="ipt-block-right" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" id="cusPrice" type="text">
+        <optional data-required="0" oninput="clearNoNumFour(this);" class="form-component w250" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="c57945e0-1453-4274-aad1-2344018cf704" name="输入框_cusWeight" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\10178642-e21a-4544-907b-a3850d926fd7.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="logisticsPackaging" class="head-tab-pane headtabpane m-top10" index="2" index-of-type="2" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="goods-edit product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="module-content-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="table">
+        <optional class="w-full" index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional index="3" index-of-type="3" />
+      </web>
+      <web x:name="td">
+        <optional index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="span">
+        <optional class="ipt-block-right" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" id="cusWeight" type="text">
+        <optional data-required="0" maxlength="12" oninput="clearNoNumAndMinus(this);" class="form-component w250" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="6e8c7532-fd98-4141-8aea-0354ec337599" name="质检与供货" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\0a221815-b712-4a91-b8c8-967103c62b49.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="in-container m-bottom12 p0-imp" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="in-screen-single p-bottom0 p-top0" index="0" index-of-type="0" />
+      </web>
+      <web x:name="ul">
+        <optional class="borderbtmno head-tab-nav headtabnav top-nav" index="0" index-of-type="0" />
+      </web>
+      <web x:name="li" innerText="质检与供货">
+        <optional uid="qualityInspectionSupply" class="borderbtmno" index="2" index-of-type="2" />
+      </web>
+    </selector>
+    <selector id="408c02e3-3081-4b54-b4f3-47e265a3aa62" name="输入框_proPrice" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\a1516a0e-ba6b-4e92-8203-5a146368a08e.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="qualityInspectionSupply" class="head-tab-pane headtabpane m-top10" index="3" index-of-type="3" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="goods-edit product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="module-content-box" index="0" index-of-type="0" />
+      </web>
+      <web x:name="table">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="td">
+        <optional index="1" index-of-type="1" />
+      </web>
+      <web x:name="input" type="text" id="proPrice">
+        <optional value="" oninput="clearNoNumAndMinusDecimalLimit4(this);" placeholder="是指商品管理维护的基础参考价格。 采购下单单价和仓库清单初始化时单价都引用的采购参考价。" class="form-component w600" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="b926a9f9-aaca-4cfd-a4f6-7361c2c7d9c9" name="add" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\41b4cbac-3b02-4fb0-bed8-290090ecb00f.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="qualityInspectionSupply" class="head-tab-pane headtabpane m-top10" index="3" index-of-type="3" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="m-top5" index="0" index-of-type="0" />
+      </web>
+      <web x:name="button">
+        <optional onclick="DXMGOODS.selectSupplier();" class="addsupplierrelation btn-determine button" index="0" index-of-type="0" />
+      </web>
+      <anchor text="add" targetRectangle="[460,383,111,32]" anchorRectangle="[473,388,20,20]" version="1" threshold="0.6" />
+    </selector>
+    <selector id="87f120e6-10fa-4885-85e2-a1756e5191f9" name="1688供货商" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\8edaa3ff-73dd-4be9-9927-92f17727de99.jpg">
+      <web x:name="div">
+        <optional id="addFromProModalForSPR" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="static" data-keyboard="false" class="in modal" index="57" index-of-type="31" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-dialog quote-modal-dialog" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="bs-example bs-example-tabs col-xs-12 modal-content p0" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 modal-body tab-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 p0" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="supplierTypeDiv" class="col-xs-10 lheight24 ptop10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="a" id="alibabaSupplier">
+        <optional href="javascript:" onclick="setSupplierTypePage('2',this)" class="m-right20 myj-afocus" innerText="1688供货商 " index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="8c97f24d-4b75-4788-aa8d-b769ba074af5" name="选择" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\8b55081f-ba51-42dd-8358-e811f22d70f8.jpg">
+      <web x:name="div">
+        <optional id="addFromProModalForSPR" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="static" data-keyboard="false" class="in modal" index="57" index-of-type="31" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-dialog quote-modal-dialog" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="bs-example bs-example-tabs col-xs-12 modal-content p0" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 modal-body tab-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 modal-body tab-content" index="3" index-of-type="3" />
+      </web>
+      <web x:name="div">
+        <optional id="addFromProSPRPageList" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional id="goodsContent" class="mtop5 p0" index="6" index-of-type="0" />
+      </web>
+      <web x:name="table">
+        <optional class="in-table" index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="1" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional class="content" index="0" index-of-type="0" />
+      </web>
+      <web x:name="td">
+        <optional index="1" index-of-type="1" />
+      </web>
+      <web x:name="a" xbox-display="true">
+        <optional href="javascript:" data-isselect="0" data-name="东莞市云章科技有限公司" onclick="addSupplierSelectMethod('54280071582671942', this)" innerText="选择" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="cfdc8c1b-1891-4b23-b188-08412c7fa75a" name="首选供应商" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\f4813818-3d78-431b-80ad-9af337128dfc.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="defaultcheck headtabbox m-top10" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional id="qualityInspectionSupply" class="head-tab-pane headtabpane m-top10" index="3" index-of-type="3" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="product-info-module-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional name="supplierRelation" class="m-top15 supplier-box" index="1" index-of-type="1" />
+      </web>
+      <web x:name="table">
+        <optional class="in-table w-full" index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional index="1" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional id="54280071582671942" class="content" index="0" index-of-type="0" />
+      </web>
+      <web x:name="td">
+        <optional class="f-left w100" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div" class="ismain m-right10 switch-label">
+        <optional onclick="DXMGOODS.changeMainSupplier(this);" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="0eb962b1-c33c-428a-9689-d6d23c91944d" name="保存" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\f8b41d88-80dc-46a8-81fd-ca5a28336449.jpg">
+      <web x:name="div">
+        <optional class="in-page-content" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="clear-fix m-top10" index="2" index-of-type="2" />
+      </web>
+      <web x:name="div" index="0">
+        <optional class="pull-right" index-of-type="0" />
+      </web>
+      <web x:name="button" class="btn-orange button m-left10" innerText="保存">
+        <optional onclick="DXMGOODS.saveCommodityPro();" index="2" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="dfdca11a-ec31-4b7e-b2a7-19c1d461aa76" name="输入框_addFromProSPRValue" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\031ef2df-2ee3-4d6f-8f4c-9834adf99c8a.jpg">
+      <web x:name="div">
+        <optional id="addFromProModalForSPR" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="static" data-keyboard="false" class="in modal" index="57" index-of-type="31" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-dialog quote-modal-dialog" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="bs-example bs-example-tabs col-xs-12 modal-content p0" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 modal-body tab-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 p0 pbottom10" index="0" index-of-type="0" />
+      </web>
+      <web x:name="form">
+        <optional class="donotsubmit" index="1" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 mtop10 p0" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-4 minw345" index="1" index-of-type="1" />
+      </web>
+      <web x:name="input" id="addFromProSPRValue" type="text">
+        <optional class="form-control" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="a7d348eb-f14e-4330-89b8-addf48f5a4e1" name="搜索" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘--添加商品" screenshot=".dev\screenshot\8e14ddde-c3e0-44fc-88b1-2015767f79c2.jpg">
+      <web x:name="div">
+        <optional id="addFromProModalForSPR" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="static" data-keyboard="false" class="in modal" index="57" index-of-type="31" />
+      </web>
+      <web x:name="div">
+        <optional class="modal-dialog quote-modal-dialog" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="bs-example bs-example-tabs col-xs-12 modal-content p0" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 modal-body tab-content" index="1" index-of-type="1" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 p0 pbottom10" index="0" index-of-type="0" />
+      </web>
+      <web x:name="form">
+        <optional class="donotsubmit" index="1" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-12 mtop10 p0" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="col-xs-1 minw100" index="2" index-of-type="2" />
+      </web>
+      <web x:name="button" id="btnSelectSearch" type="submit">
+        <optional onclick="btnAddFromProSearchIt();" class="btn-determine button" innerText="搜索" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="279ce636-5cb6-4726-be16-437e4a24a631" name="所选择的产品SKU都已创建商品..." type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘" screenshot=".dev\screenshot\b00feae9-7015-4b2e-8e18-07569641e09b.jpg">
+      <web x:name="div">
+        <optional class="m-top20 page-batch" index="55" index-of-type="29" />
+      </web>
+      <web x:name="div">
+        <optional class="goodsskuinfo page-batch-content" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="in-container page-content-box" index="3" index-of-type="3" />
+      </web>
+      <web x:name="table">
+        <optional id="batchList" class="batch-list table-list" index="0" index-of-type="0" />
+      </web>
+      <web x:name="tbody">
+        <optional id="dataListTbody" index="1" index-of-type="0" />
+      </web>
+      <web x:name="tr">
+        <optional index="0" index-of-type="0" />
+      </web>
+      <web x:name="td">
+        <optional colspan="26" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="f-center h80 p-top30" index="0" index-of-type="0" />
+      </web>
+      <web x:name="span" innerText="所选择的产品SKU都已创建商品信息，没有要生成的商品信息">
+        <optional class="f18 fw600" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="cb0b5a37-a1f1-4e18-83e0-7b5541dc5ac3" name="输入框_account" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘ERP--免费的跨境电商ERP" screenshot=".dev\screenshot\63800fad-7ca2-4648-ae62-7576613fc048.jpg">
+      <web x:name="header">
+        <optional class="header-section" index="9" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="loginregister new-form" index="0" index-of-type="0" />
+      </web>
+      <web x:name="form">
+        <optional id="loginForm" class="donotsubmit m-bottom16" index="2" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional id="Login" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="form-group upeqy" index="1" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="parent-position parentposition user" index="0" index-of-type="0" />
+      </web>
+      <web x:name="input" id="exampleInputName" name="account" type="text">
+        <optional value="" placeholder="请输入用户名" class="form-control" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="f568e6b2-c6a4-414b-aff2-ca1e3730b150" name="密码框" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘ERP--免费的跨境电商ERP" screenshot=".dev\screenshot\ec5c4625-74b6-4b11-88c1-c0264c07a897.jpg">
+      <web x:name="header">
+        <optional class="header-section" index="9" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="loginregister new-form" index="0" index-of-type="0" />
+      </web>
+      <web x:name="form">
+        <optional id="loginForm" class="donotsubmit m-bottom16" index="2" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional id="Login" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="form-group upeqy" index="1" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="parent-position parentposition user" index="2" index-of-type="1" />
+      </web>
+      <web x:name="input" name="password" type="password">
+        <optional id="exampleInputPassword" value="" placeholder="请输入密码" autocomplete="new-password" class="form-control" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="02d5301c-5d38-495e-9d2d-35d918b73504" name="图片_verifyImgCode" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘ERP--免费的跨境电商ERP" screenshot=".dev\screenshot\59534fb6-d134-47c4-9eb2-676610515163.jpg">
+      <web x:name="header">
+        <optional class="header-section" index="9" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="loginregister new-form" index="0" index-of-type="0" />
+      </web>
+      <web x:name="form">
+        <optional id="loginForm" class="donotsubmit m-bottom16" index="2" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional id="Login" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="form-group upeqy" index="1" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="parent-position parentposition user verify-code" index="4" index-of-type="2" />
+      </web>
+      <web x:name="span">
+        <optional class="check-code-img checkcode_img" index="1" index-of-type="0" />
+      </web>
+      <web x:name="a">
+        <optional href="javascript:" onclick="updateVerifyCode('#verifyImgCode');" index="0" index-of-type="0" />
+      </web>
+      <web x:name="img">
+        <optional id="verifyImgCode" data-time="1748182622466" src="//www.dianxiaomi.com/verify/code.htm?t=1748182622466" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="65566664-ced9-4f80-8b7f-1eb56f149671" name="输入框_verifyCode" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘ERP--免费的跨境电商ERP" screenshot=".dev\screenshot\1a725a7a-c696-4c3e-b72c-830fd88a9473.jpg">
+      <web x:name="header">
+        <optional class="header-section" index="9" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="loginregister new-form" index="0" index-of-type="0" />
+      </web>
+      <web x:name="form">
+        <optional id="loginForm" class="donotsubmit m-bottom16" index="2" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional id="Login" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="form-group upeqy" index="1" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="parent-position parentposition user verify-code" index="4" index-of-type="2" />
+      </web>
+      <web x:name="input" id="verifyCode" name="verifyCode" type="text">
+        <optional maxlength="4" autocomplete="off" placeholder="请输入验证码" class="form-control" index="0" index-of-type="0" />
+      </web>
+    </selector>
+    <selector id="aa09957f-4964-4613-a460-aea66263132b" name="登录" type="simple" framework="chrome" processName="chrome" productName="Google Chrome" winTitle="店小秘ERP--免费的跨境电商ERP" screenshot=".dev\screenshot\3f4c0399-2ee2-4d2d-9fa1-18a78029d4fc.jpg">
+      <web x:name="header">
+        <optional class="header-section" index="9" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="loginregister new-form" index="0" index-of-type="0" />
+      </web>
+      <web x:name="form">
+        <optional id="loginForm" class="donotsubmit m-bottom16" index="2" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional id="Login" index="0" index-of-type="0" />
+      </web>
+      <web x:name="div">
+        <optional class="form-group upeqy" index="1" index-of-type="0" />
+      </web>
+      <web x:name="button" type="button">
+        <optional id="loginBtn" onclick="login()" class="btn btn-block btn-denglu btn-info index-denglu-btn loginbnt" innerText="登录" index="7" index-of-type="0" />
+      </web>
+    </selector>
+  </group>
+</repository>

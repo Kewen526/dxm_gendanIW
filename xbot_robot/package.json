@@ -1,0 +1,1078 @@
+{
+  "uuid": "b7a7481f-57a3-42f6-8ef7-25dfdfaaa820",
+  "name": "跟单IW_003_1201_云迁_20251201114852",
+  "icon": null,
+  "version": "1",
+  "tags": null,
+  "software": null,
+  "software_title": null,
+  "package_version": 7,
+  "feature_list": [
+    2,
+    4,
+    5,
+    7
+  ],
+  "description": null,
+  "instruction": "",
+  "use_latest_pip": true,
+  "videoName": "",
+  "startup": "main",
+  "robot_type": "app",
+  "activity_code": null,
+  "flows": [
+    {
+      "name": "main",
+      "filename": "main",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": null
+    },
+    {
+      "name": "A.1-task",
+      "filename": "process1",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "task"
+    },
+    {
+      "name": "get_task",
+      "filename": "get_task",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "process_order",
+      "filename": "process_order",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "C.2-获取公司名称",
+      "filename": "process2",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "1688相关"
+    },
+    {
+      "name": "get_product_ids",
+      "filename": "get_product_ids",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "upload_task",
+      "filename": "upload_task",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "get_shop_type",
+      "filename": "get_shop_type",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "module1",
+      "filename": "module1",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "C.1-获取短标题",
+      "filename": "process4",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "1688相关"
+    },
+    {
+      "name": "random",
+      "filename": "random",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "ai_text",
+      "filename": "ai_text",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "D_sp",
+      "filename": "D_sp",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "cookie",
+      "filename": "cookie",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "extract_sku_images",
+      "filename": "extract_sku_images",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "1688相关"
+    },
+    {
+      "name": "extract_skuids",
+      "filename": "extract_skuids",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "1688相关"
+    },
+    {
+      "name": "get_alibaba_product",
+      "filename": "get_alibaba_product",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "search_product",
+      "filename": "search_product",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "ai_image",
+      "filename": "ai_image",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "RPA",
+      "filename": "process5",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "RPA_task"
+    },
+    {
+      "name": "A.1-分配手工单_首次",
+      "filename": "process6",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "RPA_task"
+    },
+    {
+      "name": "get_product_sku_info",
+      "filename": "get_product_sku_info",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "D.1-商品状态回传",
+      "filename": "process7",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "任务回传"
+    },
+    {
+      "name": "product_statu",
+      "filename": "product_statu",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "任务回传"
+    },
+    {
+      "name": "A.1-店铺单_首次",
+      "filename": "process8",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "RPA_task"
+    },
+    {
+      "name": "get_order_status",
+      "filename": "get_order_status",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "is_all_empty",
+      "filename": "is_all_empty",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "A.1-店铺单分配执行",
+      "filename": "process9",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "C.1-获取ali_link",
+      "filename": "process10",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "search",
+      "filename": "search",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "html",
+      "filename": "html",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "ali_link",
+      "filename": "ali_link",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "get_shop_num",
+      "filename": "get_shop_num",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "A.1-店铺单获取配对信息",
+      "filename": "process11",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "guige",
+      "filename": "guige",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "A.2-相似度获取new",
+      "filename": "process12",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "B.1-相似度识别(并发)",
+      "filename": "process13",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "Compare",
+      "filename": "Compare",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "F_task_首次",
+      "filename": "process14",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "RPA_task"
+    },
+    {
+      "name": "A.2-店铺单配对(并发)",
+      "filename": "process15",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "A.3-提交配对信息",
+      "filename": "process16",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "D.1-店铺单状态回传",
+      "filename": "process17",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "add_product_sg_dxm",
+      "filename": "add_product_sg_dxm",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "get_shop_dict",
+      "filename": "get_shop_dict",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "get_supplier_ids",
+      "filename": "get_supplier_ids",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "add_product_to_dianxiaomi",
+      "filename": "add_product_to_dianxiaomi",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "add_product_to_warehouse",
+      "filename": "add_product_to_warehouse",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "ali_link_new",
+      "filename": "ali_link_new",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "D.2-No未识别产品回传",
+      "filename": "process18",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "fetch_sku_code",
+      "filename": "fetch_sku_code",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "A.2-手工单创建",
+      "filename": "process20",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "get_special_pairing",
+      "filename": "get_special_pairing",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "B.1-手工单获取配对信息",
+      "filename": "process21",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "C.1-获取SKU组合",
+      "filename": "process22",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "A.3-手工单配对",
+      "filename": "process23",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "A.4-手工订单上传",
+      "filename": "process24",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "get_order_data",
+      "filename": "get_order_data",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "upload_excel_to_dianxiaomi",
+      "filename": "upload_excel_to_dianxiaomi",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "check_process",
+      "filename": "check_process",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "F-店铺单特殊配对",
+      "filename": "process25",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "B.1-店铺单特殊配对",
+      "filename": "process26",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "B.1-交运",
+      "filename": "process27",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "set_dianxiaomi_comment",
+      "filename": "set_dianxiaomi_comment",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "search_dianxiaomi_package",
+      "filename": "search_dianxiaomi_package",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "update_dianxiaomi_warehouse",
+      "filename": "update_dianxiaomi_warehouse",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "request_dianxiaomi_provider_auth",
+      "filename": "request_dianxiaomi_provider_auth",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "update_dianxiaomi_provider_batch",
+      "filename": "update_dianxiaomi_provider_batch",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "get_channel_info",
+      "filename": "get_channel_info",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "find_first_match",
+      "filename": "find_first_match",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "fetch_tracking_infov",
+      "filename": "fetch_tracking_infov",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "submit_waybill",
+      "filename": "submit_waybill",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "search_package",
+      "filename": "search_package",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "F_交运",
+      "filename": "process28",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "keer_waybill",
+      "filename": "keer_waybill",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "task_wybill",
+      "filename": "task_wybill",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "0-登录",
+      "filename": "process29",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": null
+    },
+    {
+      "name": "Compare_new",
+      "filename": "Compare_new",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "get_waybill_num",
+      "filename": "get_waybill_num",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "task_reassigned",
+      "filename": "task_reassigned",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "get_way_task",
+      "filename": "get_way_task",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "get_data_from_dianxiaomi",
+      "filename": "get_data_from_dianxiaomi",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "check_task_status",
+      "filename": "check_task_status",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "F_二次任务",
+      "filename": "process30",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "重复任务"
+    },
+    {
+      "name": "A.1-店铺单_二次",
+      "filename": "process31",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "重复任务"
+    },
+    {
+      "name": "C.2-SKU图",
+      "filename": "process32",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "A.1-上传手工订单_二次",
+      "filename": "process33",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "重复任务"
+    },
+    {
+      "name": "batch_commit_platform_packages",
+      "filename": "batch_commit_platform_packages",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "C.1-虚拟发货",
+      "filename": "process34",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "search_package_ids",
+      "filename": "search_package_ids",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "batch_set_voided",
+      "filename": "batch_set_voided",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "C.3-获取物流渠道",
+      "filename": "process35",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "C.2-回传包裹号",
+      "filename": "process36",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "send_shougongdan_request",
+      "filename": "send_shougongdan_request",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "check_beizhu",
+      "filename": "check_beizhu",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "get_package_numbers",
+      "filename": "get_package_numbers",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "send_package_order_request",
+      "filename": "send_package_order_request",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "get_ali_link",
+      "filename": "get_ali_link",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "1688相关"
+    },
+    {
+      "name": "search_dxm_product",
+      "filename": "search_dxm_product",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "重复任务"
+    },
+    {
+      "name": "B.1-手工单获取SKU",
+      "filename": "process37",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "重复任务"
+    },
+    {
+      "name": "oss",
+      "filename": "oss",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "update_manual_status",
+      "filename": "update_manual_status",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "is_one_dimensional",
+      "filename": "is_one_dimensional",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "process_order_new",
+      "filename": "process_order_new",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "excel",
+      "filename": "excel",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "get_conductor_id",
+      "filename": "get_conductor_id",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "get_product_details",
+      "filename": "get_product_details",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "1688相关"
+    },
+    {
+      "name": "0-电脑重启",
+      "filename": "process38",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "重启"
+    },
+    {
+      "name": "is_early_morning",
+      "filename": "is_early_morning",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "重启"
+    },
+    {
+      "name": "parse_sku_list",
+      "filename": "parse_sku_list",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店小秘py"
+    },
+    {
+      "name": "子流程4",
+      "filename": "process39",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "dxm_info"
+    },
+    {
+      "name": "clean_temp_directory",
+      "filename": "clean_temp_directory",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "normalize_text",
+      "filename": "normalize_text",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "店铺单识别"
+    },
+    {
+      "name": "excel2",
+      "filename": "excel2",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "手工单识别"
+    },
+    {
+      "name": "translate_text",
+      "filename": "translate_text",
+      "kind": "Code",
+      "opened": false,
+      "groupName": null
+    },
+    {
+      "name": "query_dianxiaomi",
+      "filename": "query_dianxiaomi",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "search_package2",
+      "filename": "search_package2",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "get_conductor_name",
+      "filename": "get_conductor_name",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "post_task_assignment",
+      "filename": "post_task_assignment",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "task"
+    },
+    {
+      "name": "F_创建SKU",
+      "filename": "process40",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "RPA_task"
+    },
+    {
+      "name": "get_sku_data",
+      "filename": "get_sku_data",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "task"
+    },
+    {
+      "name": "子流程6",
+      "filename": "process41",
+      "kind": "Visual",
+      "opened": false,
+      "groupName": "RPA_task"
+    },
+    {
+      "name": "check_sku_status",
+      "filename": "check_sku_status",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "RPA_task"
+    },
+    {
+      "name": "send_post_request",
+      "filename": "send_post_request",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "RPA_task"
+    },
+    {
+      "name": "check_and_clear_tables",
+      "filename": "check_and_clear_tables",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "process",
+      "filename": "process",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "RPA_task"
+    },
+    {
+      "name": "convert_to_list",
+      "filename": "convert_to_list",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "module2",
+      "filename": "module2",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "py"
+    },
+    {
+      "name": "module3",
+      "filename": "module3",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "交运"
+    },
+    {
+      "name": "post_dxm_info",
+      "filename": "post_dxm_info",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "dxm_info"
+    },
+    {
+      "name": "get_dxm_info",
+      "filename": "get_dxm_info",
+      "kind": "Code",
+      "opened": false,
+      "groupName": "dxm_info"
+    }
+  ],
+  "flow_groups": [
+    {
+      "name": "py"
+    },
+    {
+      "name": "店小秘py"
+    },
+    {
+      "name": "1688相关"
+    },
+    {
+      "name": "RPA_task"
+    },
+    {
+      "name": "任务回传"
+    },
+    {
+      "name": "店铺单识别"
+    },
+    {
+      "name": "手工单识别"
+    },
+    {
+      "name": "交运"
+    },
+    {
+      "name": "重复任务"
+    },
+    {
+      "name": "重启"
+    },
+    {
+      "name": "task"
+    },
+    {
+      "name": "dxm_info"
+    }
+  ],
+  "variables": [
+    {
+      "name": "list_task_num",
+      "type": "list",
+      "value": "[]",
+      "kind": "Expression"
+    },
+    {
+      "name": "list_task_dispatch",
+      "type": "list",
+      "value": "[]",
+      "kind": "Expression"
+    }
+  ],
+  "external_dependencies": [
+    "requests==2.28.1",
+    "PyMySQL==1.1.2",
+    "bs4==0.0.2",
+    "zhipuai==2.1.5.20250825",
+    "cached-property==2.0.1",
+    "mysql==0.0.3",
+    "mysql-connector-python==9.3.0",
+    "selenium==4.33.0",
+    "pandas==2.0.3",
+    "numpy==1.24.3",
+    "cos-python-sdk-v5==1.9.37",
+    "qcloud-cos-py3==0.1.4",
+    "googletrans==4.0.2",
+    "deep-translator==1.11.4",
+    "psutil==7.1.3",
+    "cos_python_sdk_v5==1.9.39",
+    "sniffio==1.3.1"
+  ],
+  "internaldependencies": [
+    "shadowbot_list==25.9.0",
+    "official_account==24.8.0",
+    "cookie_login==24.9.1",
+    "activity_f026eecc==24.11.0",
+    "activity_3361320b==25.2.0",
+    "activity_b354cbb0==25.2.0",
+    "activity_computer_extension==24.12.0",
+    "activity_jfbym==25.11.15"
+  ],
+  "selectordependencies": [],
+  "internalautodependencies": [
+    "activity_computer_extension",
+    "shadowbot_list",
+    "activity_f026eecc",
+    "cookie_login",
+    "activity_b354cbb0",
+    "activity_3361320b",
+    "official_account",
+    "activity_jfbym"
+  ],
+  "ipaasDependencies": [],
+  "databook_columns": [
+    {
+      "name": "A",
+      "description": "发票ID",
+      "width": 80.0
+    },
+    {
+      "name": "B",
+      "description": "订单号--未配对",
+      "width": 80.0
+    },
+    {
+      "name": "C",
+      "description": "发票编码",
+      "width": 80.0
+    },
+    {
+      "name": "D",
+      "description": "处理人ID",
+      "width": 80.0
+    },
+    {
+      "name": "E",
+      "description": "配对信息--未配对",
+      "width": 80.0
+    },
+    {
+      "name": "F",
+      "description": "店铺类型",
+      "width": 80.0
+    },
+    {
+      "name": "G",
+      "description": "店小秘SKU",
+      "width": 80.0
+    }
+  ],
+  "authority": "use",
+  "internalautoupgrade": false,
+  "isbrief": false,
+  "uia_type": "PC",
+  "persist_databook": false,
+  "encrypt_bot": false,
+  "customItems": {
+    "gifUrl": null,
+    "videoUrl": "",
+    "imageUrl": "",
+    "imageName": ""
+  },
+  "terminalTags": ""
+}
