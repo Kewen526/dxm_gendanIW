@@ -1,0 +1,652 @@
+{
+  "openedFlows": [
+    "main",
+    "A.4-手工订单上传",
+    "get_order_data",
+    "excel2"
+  ],
+  "activeBottomPanel": "运行日志",
+  "activeFlow": "main",
+  "breakPoints": [
+    {
+      "FlowName": "main",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "A.1-task",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "get_task",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "process_order",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "C.2-获取公司名称",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "get_product_ids",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "upload_task",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_shop_type",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "module1",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "C.1-获取短标题",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "random",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "ai_text",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "D_sp",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "cookie",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "extract_sku_images",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "extract_skuids",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_alibaba_product",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "search_product",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "ai_image",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "RPA",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "A.1-分配手工单_首次",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "get_product_sku_info",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "D.1-商品状态回传",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "product_statu",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "A.1-店铺单_首次",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "get_order_status",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "is_all_empty",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "A.1-店铺单分配执行",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "C.1-获取ali_link",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "search",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "html",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "ali_link",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_shop_num",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "A.1-店铺单获取配对信息",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "guige",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "A.2-相似度获取new",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "B.1-相似度识别(并发)",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "Compare",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "F_task_首次",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "A.2-店铺单配对(并发)",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "A.3-提交配对信息",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "D.1-店铺单状态回传",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "add_product_sg_dxm",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_shop_dict",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_supplier_ids",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "add_product_to_dianxiaomi",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "add_product_to_warehouse",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "ali_link_new",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "D.2-No未识别产品回传",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "fetch_sku_code",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "A.2-手工单创建",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "get_special_pairing",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "B.1-手工单获取配对信息",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "C.1-获取SKU组合",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "A.3-手工单配对",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "A.4-手工订单上传",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "get_order_data",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "upload_excel_to_dianxiaomi",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "check_process",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "F-店铺单特殊配对",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "B.1-店铺单特殊配对",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "B.1-交运",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "set_dianxiaomi_comment",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "search_dianxiaomi_package",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "update_dianxiaomi_warehouse",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "request_dianxiaomi_provider_auth",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "update_dianxiaomi_provider_batch",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_channel_info",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "find_first_match",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "fetch_tracking_infov",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "submit_waybill",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "search_package",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "F_交运",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "keer_waybill",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "task_wybill",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "0-登录",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "Compare_new",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_waybill_num",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "task_reassigned",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_way_task",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_data_from_dianxiaomi",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "check_task_status",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "F_二次任务",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "A.1-店铺单_二次",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "C.2-SKU图",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "A.1-上传手工订单_二次",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "batch_commit_platform_packages",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "C.1-虚拟发货",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "search_package_ids",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "batch_set_voided",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "C.3-获取物流渠道",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "C.2-回传包裹号",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "send_shougongdan_request",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "check_beizhu",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_package_numbers",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "send_package_order_request",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_ali_link",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "search_dxm_product",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "B.1-手工单获取SKU",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "oss",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "update_manual_status",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "is_one_dimensional",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "process_order_new",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "excel",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_conductor_id",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_product_details",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "0-电脑重启",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "is_early_morning",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "parse_sku_list",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "子流程4",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "clean_temp_directory",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "normalize_text",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "excel2",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "translate_text",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "query_dianxiaomi",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "search_package2",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "get_conductor_name",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "post_task_assignment",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "F_创建SKU",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "get_sku_data",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "子流程6",
+      "Lines": null,
+      "BlockIds": []
+    },
+    {
+      "FlowName": "check_sku_status",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "send_post_request",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "check_and_clear_tables",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "process",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "convert_to_list",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "module2",
+      "Lines": [],
+      "BlockIds": null
+    },
+    {
+      "FlowName": "module3",
+      "Lines": [],
+      "BlockIds": null
+    }
+  ]
+}
