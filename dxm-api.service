@@ -1,0 +1,33 @@
+[Unit]
+Description=DXM API Service - 店小秘API服务
+After=network.target
+
+[Service]
+Type=notify
+User=user
+Group=user
+WorkingDirectory=/home/user/dxm_gendanIW
+
+# 环境变量
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+Environment="PYTHONPATH=/home/user/dxm_gendanIW"
+
+# 启动命令（使用gunicorn）
+ExecStart=/usr/local/bin/gunicorn \
+    --config /home/user/dxm_gendanIW/gunicorn_config.py \
+    server:app
+
+# 重启策略
+Restart=always
+RestartSec=10
+
+# 资源限制
+LimitNOFILE=65535
+
+# 日志
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=dxm-api
+
+[Install]
+WantedBy=multi-user.target
