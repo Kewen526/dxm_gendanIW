@@ -1,26 +1,143 @@
 """
 API服务层 - 封装所有xbot_robot函数，统一参数处理
+所有功能集成在一个文件中，无需外部依赖
 """
 import sys
 import os
+import json
+import time
+import requests
+from datetime import datetime, timedelta
 
 # 添加项目根目录到路径
 sys.path.insert(0, os.path.dirname(__file__))
 
-# 导入本地的 cookie_manager 模块（避免与系统包冲突）
-try:
-    # 尝试从当前目录导入
-    from .cookie_manager import get_cookie_path
-except ImportError:
-    # 如果失败，直接导入（用于直接运行）
-    import importlib.util
-    spec = importlib.util.spec_from_file_location(
-        "local_cookie_manager",
-        os.path.join(os.path.dirname(__file__), "cookie_manager.py")
-    )
-    cookie_manager_module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(cookie_manager_module)
-    get_cookie_path = cookie_manager_module.get_cookie_path
+
+# ==================== 配置常量（嵌入） ====================
+# Cookie文件的远程URL
+COOKIE_URL = "https://ceshi-1300392622.cos.ap-beijing.myqcloud.com/dxm_cookie.json"
+
+# 本地Cookie缓存目录（使用临时目录，兼容RPA环境）
+COOKIE_CACHE_DIR = os.path.join(os.path.dirname(__file__), "cookie_cache")
+
+# 本地Cookie文件路径
+LOCAL_COOKIE_PATH = os.path.join(COOKIE_CACHE_DIR, "dxm_cookie.json")
+
+# Cookie缓存时间（分钟）
+COOKIE_CACHE_MINUTES = 30
+
+# HTTP配置
+DOWNLOAD_TIMEOUT = 30
+RETRY_TIMES = 3
+RETRY_DELAY = 2
+
+
+# ==================== Cookie管理功能（嵌入） ====================
+class _CookieManager:
+    """内置Cookie管理器"""
+
+    def __init__(self):
+        self.cookie_url = COOKIE_URL
+        self.local_path = LOCAL_COOKIE_PATH
+        self.cache_dir = COOKIE_CACHE_DIR
+        self.cache_minutes = COOKIE_CACHE_MINUTES
+        self.timeout = DOWNLOAD_TIMEOUT
+        self.retry_times = RETRY_TIMES
+        self.retry_delay = RETRY_DELAY
+        self._ensure_cache_dir()
+
+    def _ensure_cache_dir(self):
+        """确保缓存目录存在"""
+        if not os.path.exists(self.cache_dir):
+            try:
+                os.makedirs(self.cache_dir)
+                print(f"[CookieManager] 创建缓存目录: {self.cache_dir}")
+            except Exception as e:
+                print(f"[CookieManager] 创建缓存目录失败: {e}")
+
+    def _is_cache_valid(self):
+        """检查本地缓存是否有效"""
+        if not os.path.exists(self.local_path):
+            return False
+
+        try:
+            # 检查文件修改时间
+            file_mtime = os.path.getmtime(self.local_path)
+            file_time = datetime.fromtimestamp(file_mtime)
+            now = datetime.now()
+
+            # 判断是否过期
+            if now - file_time > timedelta(minutes=self.cache_minutes):
+                print(f"[CookieManager] Cookie缓存已过期 (超过{self.cache_minutes}分钟)")
+                return False
+
+            # 检查文件格式
+            with open(self.local_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                if 'cookies' not in data or not data['cookies']:
+                    print("[CookieManager] Cookie文件格式错误")
+                    return False
+
+            return True
+        except Exception as e:
+            print(f"[CookieManager] Cookie文件检查失败: {e}")
+            return False
+
+    def _download_cookie(self):
+        """从URL下载Cookie文件"""
+        print(f"[CookieManager] 正在从URL下载Cookie...")
+
+        for attempt in range(self.retry_times):
+            try:
+                response = requests.get(self.cookie_url, timeout=self.timeout)
+                response.raise_for_status()
+
+                # 验证JSON格式
+                cookie_data = response.json()
+                if 'cookies' not in cookie_data:
+                    raise ValueError("Cookie数据格式错误：缺少'cookies'字段")
+
+                # 保存到本地
+                with open(self.local_path, 'w', encoding='utf-8') as f:
+                    json.dump(cookie_data, f, ensure_ascii=False, indent=2)
+
+                print(f"[CookieManager] ✓ Cookie下载成功")
+                print(f"[CookieManager] ✓ 包含 {len(cookie_data['cookies'])} 个cookies")
+                return True
+
+            except Exception as e:
+                print(f"[CookieManager] ✗ 下载失败 (尝试 {attempt + 1}/{self.retry_times}): {e}")
+                if attempt < self.retry_times - 1:
+                    time.sleep(self.retry_delay)
+
+        print(f"[CookieManager] ✗ Cookie下载失败")
+        return False
+
+    def get_cookie_path(self, force_refresh=False):
+        """获取可用的Cookie文件路径"""
+        # 如果强制刷新或缓存无效，则下载
+        if force_refresh or not self._is_cache_valid():
+            if not self._download_cookie():
+                # 如果下载失败，检查是否有旧的缓存可用
+                if os.path.exists(self.local_path):
+                    print("[CookieManager] ⚠️  使用旧的Cookie缓存")
+                    return self.local_path
+                else:
+                    print("[CookieManager] ✗ 无法获取Cookie")
+                    return None
+        else:
+            print(f"[CookieManager] ✓ 使用缓存的Cookie")
+
+        return self.local_path
+
+
+# 创建全局Cookie管理器实例
+_cookie_manager = _CookieManager()
+
+
+def get_cookie_path(force_refresh=False):
+    """获取Cookie文件路径"""
+    return _cookie_manager.get_cookie_path(force_refresh)
 
 # 导入xbot_robot的各个模块
 from xbot_robot import (
