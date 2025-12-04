@@ -1417,6 +1417,117 @@ def run_scraper(days: int) -> List[Dict[str, Any]]:
     return responses
 
 
+# ==================== 服务类包装器 ====================
+class DianxiaomiService:
+    """店小秘服务类 - 提供面向对象的接口"""
+
+    def search_product(self, search_value, shop_code, variant, debug=False):
+        """搜索商品（单个结果）"""
+        return search_dxm_product(search_value, shop_code, variant, debug)
+
+    def search_product_all(self, search_value, shop_code, variant, debug=False):
+        """搜索商品（所有结果）"""
+        return search_dxm_product_all(search_value, shop_code, variant, debug)
+
+    def search_package(self, content):
+        """搜索包裹"""
+        return search_package(content)
+
+    def search_package_ids(self, content):
+        """搜索包裹IDs"""
+        return search_package_ids(content)
+
+    def search_package2(self, content):
+        """搜索包裹方法2"""
+        return search_package2(content)
+
+    def get_package_numbers(self, content):
+        """获取包裹号"""
+        return get_package_numbers(content)
+
+    def get_dianxiaomi_order_id(self, content):
+        """获取店小秘订单ID"""
+        return get_dianxiaomi_order_id(content)
+
+    def add_product(self, data):
+        """添加商品"""
+        return add_product_to_dianxiaomi(
+            data['name'], data['name_en'], data['price'],
+            data['url'], data['custom_zn'], data['custom_en']
+        )
+
+    def add_product_sg(self, data):
+        """添加新加坡商品"""
+        return add_product_sg_dxm(
+            data['name'], data['name_en'], data['sku_code'],
+            data['sku'], data['price'], data['url']
+        )
+
+    def add_product_to_warehouse(self, sku):
+        """添加商品到仓库"""
+        return add_product_to_warehouse(sku)
+
+    def set_comment(self, package_ids):
+        """设置备注"""
+        return set_dianxiaomi_comment(package_ids)
+
+    def batch_commit(self, package_ids):
+        """批量提交"""
+        return batch_commit_platform_packages(package_ids)
+
+    def batch_void(self, package_ids):
+        """批量作废"""
+        return batch_set_voided(package_ids)
+
+    def update_warehouse(self, package_ids, storage_id):
+        """更新仓库"""
+        return update_dianxiaomi_warehouse(package_ids, storage_id)
+
+    def update_provider(self, package_ids, auth_id):
+        """更新供应商"""
+        return update_dianxiaomi_provider_batch(package_ids, auth_id)
+
+    def get_supplier_ids(self, supplier_name):
+        """获取供应商IDs"""
+        return get_supplier_ids(supplier_name)
+
+    def get_shop_dict(self):
+        """获取店铺字典"""
+        return get_shop_dict_with_cookie()
+
+    def get_provider_list(self):
+        """获取供应商列表"""
+        return request_dianxiaomi_provider_auth()
+
+    def get_ali_link(self, product_url):
+        """获取阿里链接"""
+        return get_ail_link(product_url)
+
+    def fetch_sku_code(self):
+        """获取SKU代码"""
+        return fetch_sku_code()
+
+    def upload_excel(self, file_path):
+        """上传Excel文件"""
+        return upload_excel_to_dianxiaomi(file_path)
+
+    def run_scraper(self, days):
+        """运行爬虫"""
+        return run_scraper(days)
+
+
+# 全局服务实例
+_service = None
+
+
+def get_service():
+    """获取服务实例的便捷函数"""
+    global _service
+    if _service is None:
+        _service = DianxiaomiService()
+    return _service
+
+
 if __name__ == "__main__":
     # 测试
     result = get_package_numbers("LYS-SP00001-15fe2a-c9-2156-A")
