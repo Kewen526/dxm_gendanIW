@@ -18,11 +18,11 @@ import re
 def search_package(cookie_json_path, content):
     """
     搜索店小秘包裹信息，并提取运单号
-    
+
     参数:
         cookie_json_path (str): 本地cookie的JSON文件路径
         content (str): 搜索内容（订单号）
-    
+
     返回:
         str: 运单号，如果找不到则返回None
     """
@@ -30,7 +30,7 @@ def search_package(cookie_json_path, content):
     try:
         with open(cookie_json_path, 'r', encoding='utf-8') as f:
             cookie_data = json.load(f)
-        
+
         # 从cookie数据中提取cookies数组，并转换为requests所需的字典格式
         cookies_dict = {}
         if 'cookies' in cookie_data and isinstance(cookie_data['cookies'], list):
@@ -43,27 +43,31 @@ def search_package(cookie_json_path, content):
     except Exception as e:
         print(f"读取cookie文件时出错: {e}")
         return None
-    
-    # 请求URL
-    url = 'https://www.dianxiaomi.com/package/searchPackage.htm'
-    
+
+    # 新的API URL
+    url = 'https://www.dianxiaomi.com/api/package/searchPackage.json'
+
+    # 构建cookie字符串
+    cookie_string = '; '.join([f"{k}={v}" for k, v in cookies_dict.items()])
+
     # 请求头
     headers = {
-        'accept': 'text/html, */*; q=0.01',
+        'accept': 'application/json, text/plain, */*',
         'accept-language': 'zh-CN,zh;q=0.9',
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'bx-v': '2.5.11',
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': cookie_string,
         'origin': 'https://www.dianxiaomi.com',
-        'referer': 'https://www.dianxiaomi.com/order/index.htm?go=m1-1',
+        'referer': 'https://www.dianxiaomi.com/web/order/all',
         'sec-ch-ua': '"Chromium";v="136", "Google Chrome";v="136", "Not.A/Brand";v="99"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': '"Windows"',
         'sec-fetch-dest': 'empty',
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-origin',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36',
-        'x-requested-with': 'XMLHttpRequest'
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36'
     }
-    
+
     # 请求数据
     data = {
         'pageNo': '1',
@@ -98,28 +102,42 @@ def search_package(cookie_json_path, content):
         'behindTrack': '-1',
         'storageId': '0',
         'timeOut': '0',
-        'orderSearchType': '1'
+        'orderSearchType': '1',
+        'axios_cancelToken': 'true'
     }
-    
+
     # 发送请求
     try:
-        response = requests.post(url, headers=headers, cookies=cookies_dict, data=data)
-        
-        # 如果请求成功
-        if response.status_code == 200:
-            # 使用正则表达式提取运单号
-            tracking_pattern = r"doTrack\('([^']+)'"
-            tracking_matches = re.findall(tracking_pattern, response.text)
-            
-            if tracking_matches:
-                # 返回第一个匹配的运单号
-                return tracking_matches[0]
+        response = requests.post(url, headers=headers, data=data)
+        response.raise_for_status()
+
+        # 解析JSON响应
+        result = response.json()
+
+        # 检查响应状态
+        if result.get('code') != 0:
+            print(f"API返回错误: {result.get('msg', '未知错误')}")
+            return None
+
+        # 提取包裹列表
+        package_list = result.get('data', {}).get('page', {}).get('list', [])
+
+        if package_list:
+            # 返回第一个包裹的运单号 (expressNumber字段)
+            first_package = package_list[0]
+            tracking_number = first_package.get('expressNumber') or first_package.get('trackingNumber')
+            if tracking_number:
+                return tracking_number
             else:
                 print("未找到运单号")
                 return None
         else:
-            print(f"请求失败，状态码: {response.status_code}")
+            print("未找到包裹")
             return None
+
+    except json.JSONDecodeError as e:
+        print(f"JSON解析失败: {e}")
+        return None
     except Exception as e:
         print(f"请求失败: {e}")
         return None
