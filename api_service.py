@@ -139,6 +139,18 @@ def get_cookie_path(force_refresh=False):
     """获取Cookie文件路径"""
     return _cookie_manager.get_cookie_path(force_refresh)
 
+
+# ==================== 修复 xbot_robot 导入问题 ====================
+# 创建 mock package 模块，避免相对导入错误
+class _MockPackage:
+    """Mock package 模块"""
+    class variables:
+        pass
+
+# 将 mock package 添加到 sys.modules
+sys.modules['xbot_robot.package'] = _MockPackage()
+sys.modules['package'] = _MockPackage()
+
 # 导入xbot_robot的各个模块
 from xbot_robot import (
     search_dxm_product,
