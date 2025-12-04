@@ -431,6 +431,159 @@ def get_service():
     return _service
 
 
+# ==================== 函数式接口 - 直接导出原始函数 ====================
+# 以下函数使用 xbot_robot 的原始函数名和参数定义，可以直接调用
+
+# 导入 xbot_robot 模块（避免命名冲突）
+from xbot_robot import search_dxm_product as _search_dxm_product_module
+from xbot_robot import add_product_to_dianxiaomi as _add_product_to_dianxiaomi_module
+from xbot_robot import add_product_sg_dxm as _add_product_sg_dxm_module
+from xbot_robot import add_product_to_warehouse as _add_product_to_warehouse_module
+from xbot_robot import search_package as _search_package_module
+from xbot_robot import search_package_ids as _search_package_ids_module
+from xbot_robot import search_package2 as _search_package2_module
+from xbot_robot import get_package_numbers as _get_package_numbers_module
+from xbot_robot import search_dianxiaomi_package as _search_dianxiaomi_package_module
+from xbot_robot import batch_commit_platform_packages as _batch_commit_platform_packages_module
+from xbot_robot import batch_set_voided as _batch_set_voided_module
+from xbot_robot import update_dianxiaomi_warehouse as _update_dianxiaomi_warehouse_module
+from xbot_robot import update_dianxiaomi_provider_batch as _update_dianxiaomi_provider_batch_module
+from xbot_robot import set_dianxiaomi_comment as _set_dianxiaomi_comment_module
+from xbot_robot import get_shop_dict as _get_shop_dict_module
+from xbot_robot import get_supplier_ids as _get_supplier_ids_module
+from xbot_robot import request_dianxiaomi_provider_auth as _request_dianxiaomi_provider_auth_module
+from xbot_robot import get_ali_link as _get_ali_link_module
+from xbot_robot import fetch_sku_code as _fetch_sku_code_module
+from xbot_robot import upload_excel_to_dianxiaomi as _upload_excel_to_dianxiaomi_module
+from xbot_robot import get_dxm_info as _get_dxm_info_module
+
+# 搜索类函数
+def search_dxm_product(search_value, shop_code, variant, cookie_file_path, debug=False):
+    """搜索店小秘商品（返回第一个匹配结果）"""
+    return _search_dxm_product_module.search_dxm_product(
+        search_value, shop_code, variant, cookie_file_path, debug
+    )
+
+def search_dxm_product_all(search_value, shop_code, variant, cookie_file_path, debug=False):
+    """搜索店小秘商品（返回所有匹配结果）"""
+    return _search_dxm_product_module.search_dxm_product_all(
+        search_value, shop_code, variant, cookie_file_path, debug
+    )
+
+def search_package(cookie_json_path, content):
+    """搜索包裹信息并提取运单号"""
+    return _search_package_module.search_package(cookie_json_path, content)
+
+def search_package_ids(cookie_file_path, content):
+    """搜索包裹ID列表"""
+    return _search_package_ids_module.search_package(cookie_file_path, content)
+
+def search_package2(content, cookie_file_path):
+    """搜索包裹（方法2）"""
+    return _search_package2_module.search_package(content, cookie_file_path)
+
+def get_package_numbers(content, cookie_file_path):
+    """获取包裹号列表"""
+    return _get_package_numbers_module.get_package_numbers(content, cookie_file_path)
+
+def get_dianxiaomi_order_id(cookie_file_path, content):
+    """获取店小秘订单ID"""
+    return _search_dianxiaomi_package_module.get_dianxiaomi_order_id(cookie_file_path, content)
+
+# 商品管理类函数
+def add_product_to_dianxiaomi(
+    cookies_file, name, name_en, price, url, custom_zn, custom_en,
+    sb_weight, sb_price, supplier, main_supplier, img_url, id,
+    pid_pair, vid_pair, shop_id_pair, sku
+):
+    """添加商品到店小秘"""
+    return _add_product_to_dianxiaomi_module.add_product_to_dianxiaomi(
+        cookies_file, name, name_en, price, url, custom_zn, custom_en,
+        sb_weight, sb_price, supplier, main_supplier, img_url, id,
+        pid_pair, vid_pair, shop_id_pair, sku
+    )
+
+def add_product_sg_dxm(
+    name, name_en, sku_code, sku, price, source_url, img_url, is_used,
+    product_type, product_status, name_cn_bg, name_en_bg, weight_bg,
+    price_bg, danger_des_bg, warehouse_id_list, supplier_id, is_main,
+    cookie_file_path
+):
+    """添加SG商品到店小秘"""
+    return _add_product_sg_dxm_module.add_product_to_dianxiaomi(
+        name, name_en, sku_code, sku, price, source_url, img_url, is_used,
+        product_type, product_status, name_cn_bg, name_en_bg, weight_bg,
+        price_bg, danger_des_bg, warehouse_id_list, supplier_id, is_main,
+        cookie_file_path
+    )
+
+def add_product_to_warehouse(cookies_file_path, sku):
+    """添加商品到仓库"""
+    return _add_product_to_warehouse_module.add_product_to_warehouse(cookies_file_path, sku)
+
+# 订单操作类函数
+def set_dianxiaomi_comment(cookie_file_path, package_ids):
+    """设置订单备注"""
+    return _set_dianxiaomi_comment_module.set_dianxiaomi_comment(cookie_file_path, package_ids)
+
+def batch_commit_platform_packages(cookie_file_path, package_ids):
+    """批量提交包裹到平台"""
+    return _batch_commit_platform_packages_module.batch_commit_platform_packages(
+        cookie_file_path, package_ids
+    )
+
+def batch_set_voided(cookie_file_path, package_ids):
+    """批量设置包裹为作废"""
+    return _batch_set_voided_module.batch_set_voided(cookie_file_path, package_ids)
+
+def update_dianxiaomi_warehouse(cookie_file_path, package_ids, storage_id):
+    """更新包裹仓库"""
+    return _update_dianxiaomi_warehouse_module.update_dianxiaomi_warehouse(
+        cookie_file_path, package_ids, storage_id
+    )
+
+def update_dianxiaomi_provider_batch(cookie_file_path, package_ids, auth_id):
+    """批量更新物流服务商"""
+    return _update_dianxiaomi_provider_batch_module.update_dianxiaomi_provider_batch(
+        cookie_file_path, package_ids, auth_id
+    )
+
+# 信息查询类函数
+def get_supplier_ids(cookies_file_path, supplier_name):
+    """获取供应商ID"""
+    return _get_supplier_ids_module.get_supplier_ids(cookies_file_path, supplier_name)
+
+def get_shop_dict_with_cookie(cookie_file_path):
+    """获取店铺字典"""
+    return _get_shop_dict_module.get_shop_dict_with_cookie(cookie_file_path)
+
+def request_dianxiaomi_provider_auth(cookie_file_path):
+    """获取物流服务商列表"""
+    return _request_dianxiaomi_provider_auth_module.request_dianxiaomi_provider_auth(
+        cookie_file_path
+    )
+
+def get_ail_link(product_url, cookie_file_path):
+    """获取阿里巴巴链接"""
+    return _get_ali_link_module.get_ail_link(product_url, cookie_file_path)
+
+def fetch_sku_code(cookie_file_path):
+    """获取SKU代码"""
+    return _fetch_sku_code_module.fetch_sku_code(cookie_file_path)
+
+# 文件上传类函数
+def upload_excel_to_dianxiaomi(file_path, cookie_file_path):
+    """上传Excel文件到店小秘"""
+    return _upload_excel_to_dianxiaomi_module.upload_excel_to_dianxiaomi(
+        file_path, cookie_file_path
+    )
+
+# 数据抓取类函数
+def run_scraper(cookie_json_path, days):
+    """运行订单爬虫"""
+    return _get_dxm_info_module.run_scraper(cookie_json_path, days)
+
+
 if __name__ == "__main__":
     # 测试服务
     print("=" * 60)
