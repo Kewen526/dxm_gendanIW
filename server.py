@@ -1,363 +1,203 @@
 """
-HTTP API服务器 - 提供RESTful API接口
+通用HTTP API服务器 - 提供统一的API代理服务
 使用Flask框架
+
+特点：
+- 单一endpoint: /api/execute
+- 自动注入Cookie
+- 速率限制: 8次/秒
+- 支持POST和GET方法
+- 返回目标API的原始响应
 
 启动方式：
     python server.py
 
-API文档：
-    访问 http://localhost:5000/ 查看所有可用接口
+部署地址：
+    http://47.104.72.198:5000
 """
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import traceback
 import config
-from api_service import get_service
+from generic_api_service import get_service
 
 app = Flask(__name__)
 CORS(app)  # 允许跨域请求
 
-# 获取服务实例
-service = None
+# 获取通用API服务实例
+api_service = None
 
 
-def get_api_service():
-    """获取API服务实例"""
-    global service
-    if service is None:
-        service = get_service()
-    return service
-
-
-def success_response(data, message="操作成功"):
-    """成功响应格式"""
-    return jsonify({
-        "success": True,
-        "data": data,
-        "message": message
-    })
-
-
-def error_response(error, message="操作失败"):
-    """错误响应格式"""
-    return jsonify({
-        "success": False,
-        "error": str(error),
-        "message": message
-    }), 400
+def get_generic_api_service():
+    """获取通用API服务实例"""
+    global api_service
+    if api_service is None:
+        api_service = get_service()
+    return api_service
 
 
 @app.route('/', methods=['GET'])
 def index():
     """API文档首页"""
-    apis = {
-        "API服务器": "店小秘API服务",
-        "版本": "1.0.0",
-        "可用接口": {
-            "搜索类": {
-                "POST /api/search/product": "搜索商品（单个结果）",
-                "POST /api/search/product_all": "搜索商品（所有结果）",
-                "POST /api/search/package": "搜索包裹",
-                "POST /api/search/package_ids": "搜索包裹ID列表",
-                "POST /api/search/package2": "搜索包裹（方法2）",
-                "POST /api/search/package_numbers": "获取包裹号列表",
-                "POST /api/search/order_id": "获取订单ID"
+    docs = {
+        "服务名称": "通用HTTP API代理服务",
+        "版本": "2.0.0",
+        "服务器地址": "http://47.104.72.198:5000",
+        "特点": [
+            "单一endpoint - 简化API调用",
+            "自动Cookie注入 - 无需手动管理",
+            "速率限制 - 8次/秒",
+            "支持POST和GET方法",
+            "返回目标API的原始响应"
+        ],
+        "endpoint": {
+            "路径": "POST /api/execute",
+            "说明": "执行任意HTTP请求",
+            "参数": {
+                "url": "目标API的完整URL（必填）",
+                "headers": "请求头字典，不含cookie（可选）",
+                "data": "POST请求的表单数据（可选）",
+                "method": "HTTP方法，'POST'或'GET'，默认'POST'（可选）",
+                "params": "GET请求的URL参数（可选）"
             },
-            "商品管理类": {
-                "POST /api/product/add": "添加商品",
-                "POST /api/product/add_sg": "添加SG商品",
-                "POST /api/product/add_to_warehouse": "添加商品到仓库"
-            },
-            "订单操作类": {
-                "POST /api/order/set_comment": "设置订单备注",
-                "POST /api/order/batch_commit": "批量提交订单",
-                "POST /api/order/batch_void": "批量作废订单",
-                "POST /api/order/update_warehouse": "更新仓库",
-                "POST /api/order/update_provider": "更新物流商"
-            },
-            "信息查询类": {
-                "POST /api/info/get_supplier_ids": "获取供应商ID",
-                "GET /api/info/get_shop_dict": "获取店铺字典",
-                "GET /api/info/get_provider_list": "获取物流商列表",
-                "POST /api/info/get_ali_link": "获取阿里链接",
-                "GET /api/info/fetch_sku_code": "获取SKU代码"
-            },
-            "文件上传类": {
-                "POST /api/upload/excel": "上传Excel文件"
-            },
-            "数据抓取类": {
-                "POST /api/scraper/run": "运行订单爬虫"
+            "返回格式": {
+                "success": "布尔值，表示请求是否成功",
+                "status_code": "HTTP状态码",
+                "response": "目标API的原始响应数据",
+                "response_type": "'json'或'text'",
+                "headers": "响应头字典",
+                "error": "错误信息（失败时）"
             }
-        }
+        },
+        "使用示例": {
+            "POST请求": {
+                "url": "https://www.dianxiaomi.com/api/package/searchPackage.json",
+                "headers": {
+                    "accept": "application/json, text/plain, */*",
+                    "content-type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                    "pageNo": "1",
+                    "pageSize": "100",
+                    "searchType": "orderId",
+                    "content": "ORDER123"
+                },
+                "method": "POST"
+            },
+            "GET请求": {
+                "url": "https://www.dianxiaomi.com/dxmCommodityProduct/openAddModal.htm",
+                "headers": {
+                    "accept": "text/html"
+                },
+                "method": "GET"
+            }
+        },
+        "客户端代码": "使用 client_api.py 中的 api_call() 函数",
+        "注意事项": [
+            "请求头中不要包含cookie，服务器会自动注入",
+            "速率限制为8次/秒，超过会自动等待",
+            "客户端遇到429状态码应自动重试"
+        ]
     }
-    return jsonify(apis)
+    return jsonify(docs)
 
 
-# ==================== 搜索类接口 ====================
+@app.route('/api/execute', methods=['POST'])
+def execute_request():
+    """
+    通用HTTP请求执行器
 
-@app.route('/api/search/product', methods=['POST'])
-def search_product():
-    """搜索商品（单个结果）"""
+    接收参数：
+        - url: 目标API的完整URL
+        - headers: 请求头（不含cookie）
+        - data: POST请求数据
+        - method: HTTP方法（'POST'或'GET'）
+        - params: GET请求参数
+
+    返回：
+        目标API的原始响应
+    """
     try:
-        data = request.json
-        result = get_api_service().search_product(
-            data['search_value'],
-            data['shop_code'],
-            data['variant'],
-            data.get('debug', False)
+        # 获取请求参数
+        request_data = request.json
+
+        if not request_data:
+            return jsonify({
+                "success": False,
+                "error": "请求体不能为空",
+                "message": "请提供JSON格式的请求参数"
+            }), 400
+
+        # 提取参数
+        url = request_data.get('url')
+        headers = request_data.get('headers', {})
+        data = request_data.get('data')
+        method = request_data.get('method', 'POST')
+        params = request_data.get('params')
+
+        # 验证必填参数
+        if not url:
+            return jsonify({
+                "success": False,
+                "error": "缺少必填参数: url",
+                "message": "请提供目标API的URL"
+            }), 400
+
+        # 验证HTTP方法
+        if method.upper() not in ['POST', 'GET']:
+            return jsonify({
+                "success": False,
+                "error": f"不支持的HTTP方法: {method}",
+                "message": "仅支持POST和GET方法"
+            }), 400
+
+        # 执行请求
+        service = get_generic_api_service()
+        result = service.execute_request(
+            url=url,
+            headers=headers,
+            data=data,
+            method=method,
+            params=params
         )
-        return success_response(result)
+
+        # 返回结果
+        if result.get('success'):
+            return jsonify(result), 200
+        else:
+            # 请求失败，返回错误信息
+            status_code = result.get('status_code', 500)
+            return jsonify(result), status_code
+
     except Exception as e:
-        return error_response(e, f"搜索商品失败: {str(e)}")
+        # 捕获所有异常
+        error_trace = traceback.format_exc()
+        print(f"[Server] 错误: {error_trace}")
+
+        return jsonify({
+            "success": False,
+            "error": str(e),
+            "message": "服务器内部错误",
+            "traceback": error_trace
+        }), 500
 
 
-@app.route('/api/search/product_all', methods=['POST'])
-def search_product_all():
-    """搜索商品（所有结果）"""
+@app.route('/health', methods=['GET'])
+def health_check():
+    """健康检查endpoint"""
     try:
-        data = request.json
-        result = get_api_service().search_product_all(
-            data['search_value'],
-            data['shop_code'],
-            data['variant'],
-            data.get('debug', False)
-        )
-        return success_response(result)
+        service = get_generic_api_service()
+        return jsonify({
+            "status": "healthy",
+            "service": "generic-api",
+            "version": "2.0.0",
+            "cookie_available": service.cookie_path is not None
+        }), 200
     except Exception as e:
-        return error_response(e, f"搜索商品失败: {str(e)}")
-
-
-@app.route('/api/search/package', methods=['POST'])
-def search_package():
-    """搜索包裹"""
-    try:
-        data = request.json
-        result = get_api_service().search_package(data['content'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"搜索包裹失败: {str(e)}")
-
-
-@app.route('/api/search/package_ids', methods=['POST'])
-def search_package_ids():
-    """搜索包裹ID列表"""
-    try:
-        data = request.json
-        result = get_api_service().search_package_ids(data['content'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"搜索包裹ID失败: {str(e)}")
-
-
-@app.route('/api/search/package2', methods=['POST'])
-def search_package2():
-    """搜索包裹（方法2）"""
-    try:
-        data = request.json
-        result = get_api_service().search_package2(data['content'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"搜索包裹失败: {str(e)}")
-
-
-@app.route('/api/search/package_numbers', methods=['POST'])
-def search_package_numbers():
-    """获取包裹号列表"""
-    try:
-        data = request.json
-        result = get_api_service().get_package_numbers(data['content'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"获取包裹号失败: {str(e)}")
-
-
-@app.route('/api/search/order_id', methods=['POST'])
-def get_order_id():
-    """获取订单ID"""
-    try:
-        data = request.json
-        result = get_api_service().get_dianxiaomi_order_id(data['content'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"获取订单ID失败: {str(e)}")
-
-
-# ==================== 商品管理类接口 ====================
-
-@app.route('/api/product/add', methods=['POST'])
-def add_product():
-    """添加商品"""
-    try:
-        data = request.json
-        result = get_api_service().add_product(data)
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"添加商品失败: {str(e)}")
-
-
-@app.route('/api/product/add_sg', methods=['POST'])
-def add_product_sg():
-    """添加SG商品"""
-    try:
-        data = request.json
-        result = get_api_service().add_product_sg(data)
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"添加SG商品失败: {str(e)}")
-
-
-@app.route('/api/product/add_to_warehouse', methods=['POST'])
-def add_product_to_warehouse():
-    """添加商品到仓库"""
-    try:
-        data = request.json
-        result = get_api_service().add_product_to_warehouse(data['sku'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"添加商品到仓库失败: {str(e)}")
-
-
-# ==================== 订单操作类接口 ====================
-
-@app.route('/api/order/set_comment', methods=['POST'])
-def set_comment():
-    """设置订单备注"""
-    try:
-        data = request.json
-        result = get_api_service().set_comment(data['package_ids'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"设置备注失败: {str(e)}")
-
-
-@app.route('/api/order/batch_commit', methods=['POST'])
-def batch_commit():
-    """批量提交订单"""
-    try:
-        data = request.json
-        result = get_api_service().batch_commit(data['package_ids'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"批量提交失败: {str(e)}")
-
-
-@app.route('/api/order/batch_void', methods=['POST'])
-def batch_void():
-    """批量作废订单"""
-    try:
-        data = request.json
-        result = get_api_service().batch_void(data['package_ids'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"批量作废失败: {str(e)}")
-
-
-@app.route('/api/order/update_warehouse', methods=['POST'])
-def update_warehouse():
-    """更新仓库"""
-    try:
-        data = request.json
-        result = get_api_service().update_warehouse(
-            data['package_ids'],
-            data['storage_id']
-        )
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"更新仓库失败: {str(e)}")
-
-
-@app.route('/api/order/update_provider', methods=['POST'])
-def update_provider():
-    """更新物流商"""
-    try:
-        data = request.json
-        result = get_api_service().update_provider(
-            data['package_ids'],
-            data['auth_id']
-        )
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"更新物流商失败: {str(e)}")
-
-
-# ==================== 信息查询类接口 ====================
-
-@app.route('/api/info/get_supplier_ids', methods=['POST'])
-def get_supplier_ids():
-    """获取供应商ID"""
-    try:
-        data = request.json
-        result = get_api_service().get_supplier_ids(data['supplier_name'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"获取供应商ID失败: {str(e)}")
-
-
-@app.route('/api/info/get_shop_dict', methods=['GET'])
-def get_shop_dict():
-    """获取店铺字典"""
-    try:
-        result = get_api_service().get_shop_dict()
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"获取店铺字典失败: {str(e)}")
-
-
-@app.route('/api/info/get_provider_list', methods=['GET'])
-def get_provider_list():
-    """获取物流商列表"""
-    try:
-        result = get_api_service().get_provider_list()
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"获取物流商列表失败: {str(e)}")
-
-
-@app.route('/api/info/get_ali_link', methods=['POST'])
-def get_ali_link():
-    """获取阿里链接"""
-    try:
-        data = request.json
-        result = get_api_service().get_ali_link(data['product_url'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"获取阿里链接失败: {str(e)}")
-
-
-@app.route('/api/info/fetch_sku_code', methods=['GET'])
-def fetch_sku_code():
-    """获取SKU代码"""
-    try:
-        result = get_api_service().fetch_sku_code()
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"获取SKU代码失败: {str(e)}")
-
-
-# ==================== 文件上传类接口 ====================
-
-@app.route('/api/upload/excel', methods=['POST'])
-def upload_excel():
-    """上传Excel文件"""
-    try:
-        data = request.json
-        result = get_api_service().upload_excel(data['file_path'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"上传Excel失败: {str(e)}")
-
-
-# ==================== 数据抓取类接口 ====================
-
-@app.route('/api/scraper/run', methods=['POST'])
-def run_scraper():
-    """运行订单爬虫"""
-    try:
-        data = request.json
-        result = get_api_service().run_scraper(data['days'])
-        return success_response(result)
-    except Exception as e:
-        return error_response(e, f"运行爬虫失败: {str(e)}")
+        return jsonify({
+            "status": "unhealthy",
+            "error": str(e)
+        }), 500
 
 
 # ==================== 错误处理 ====================
@@ -368,7 +208,7 @@ def not_found(error):
     return jsonify({
         "success": False,
         "error": "NOT_FOUND",
-        "message": "接口不存在"
+        "message": "接口不存在，请使用 POST /api/execute"
     }), 404
 
 
@@ -384,10 +224,12 @@ def internal_error(error):
 
 if __name__ == '__main__':
     print("=" * 60)
-    print("店小秘API服务器")
+    print("通用HTTP API代理服务器")
     print("=" * 60)
     print(f"服务器地址: http://{config.API_HOST}:{config.API_PORT}")
     print(f"调试模式: {config.DEBUG}")
+    print(f"速率限制: 8次/秒")
+    print(f"主要endpoint: POST /api/execute")
     print("=" * 60)
     print("\n启动服务器...")
 
