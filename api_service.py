@@ -432,30 +432,54 @@ def get_package_numbers(content: str) -> Optional[List[str]]:
     if not cookies:
         return None
 
-    url = "https://www.dianxiaomi.com/package/searchPackage.htm"
+    # 使用新API端点
+    url = "https://www.dianxiaomi.com/api/package/searchPackage.json"
 
     headers = {
-        'accept': 'text/html, */*; q=0.01',
+        'accept': 'application/json, text/plain, */*',
         'accept-language': 'zh-CN,zh;q=0.9',
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'origin': 'https://www.dianxiaomi.com',
-        'referer': 'https://www.dianxiaomi.com/order/index.htm?go=m1-1',
+        'bx-v': '2.5.11',
+        'content-type': 'application/x-www-form-urlencoded',
+        'referer': 'https://www.dianxiaomi.com/web/order/all?go=m1-1',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'x-requested-with': 'XMLHttpRequest'
+        'sec-ch-ua': '"Chromium";v="109", "Not_A Brand";v="99"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin'
     }
 
     data = {
         'pageNo': '1',
         'pageSize': '100',
+        'state': '',
+        'shopId': '-1',
+        'history': '',
         'searchType': 'orderId',
         'content': content,
-        'isVoided': '-1'
+        'isVoided': '-1',
+        'isRemoved': '-1',
+        'isSearch': '1',
+        'orderField': 'order_create_time',
+        'orderSearchType': '1',
+        'storageId': '0',
+        'axios_cancelToken': 'true'
     }
 
     try:
         response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
-        matches = re.findall(r'data-packageNumber="([^"]+)"', response.text)
-        return matches if matches else []
+        result = response.json()
+
+        # 检查API返回状态
+        if result.get('code') != 0:
+            return []
+
+        # 从JSON响应中提取包裹号
+        orders = result.get('data', {}).get('page', {}).get('list', [])
+        package_numbers = [order.get('packageNumber') for order in orders if order.get('packageNumber')]
+
+        return package_numbers if package_numbers else []
     except:
         return None
 
