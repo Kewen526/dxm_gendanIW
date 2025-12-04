@@ -365,13 +365,21 @@ def run_scraper():
 @app.errorhandler(404)
 def not_found(error):
     """404错误处理"""
-    return error_response("NOT_FOUND", "接口不存在"), 404
+    return jsonify({
+        "success": False,
+        "error": "NOT_FOUND",
+        "message": "接口不存在"
+    }), 404
 
 
 @app.errorhandler(500)
 def internal_error(error):
     """500错误处理"""
-    return error_response("INTERNAL_ERROR", "服务器内部错误"), 500
+    return jsonify({
+        "success": False,
+        "error": "INTERNAL_ERROR",
+        "message": "服务器内部错误"
+    }), 500
 
 
 if __name__ == '__main__':
