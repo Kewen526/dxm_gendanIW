@@ -19,11 +19,11 @@ import re
 def search_package(content, cookie_file_path):
     """
     Search for a package on dianxiaomi.com and extract just the package number.
-    
+
     Args:
         content: The search content value
         cookie_file_path: Path to the JSON file containing cookies
-        
+
     Returns:
         The package number if found, otherwise None
     """
@@ -31,23 +31,33 @@ def search_package(content, cookie_file_path):
         # Load cookies from JSON file
         with open(cookie_file_path, 'r', encoding='utf-8') as f:
             cookie_data = json.load(f)
-        
+
         # Extract cookies
         cookies = {}
         for cookie in cookie_data.get('cookies', []):
             cookies[cookie['name']] = cookie['value']
-        
+
+        # 构建cookie字符串
+        cookie_string = '; '.join([f"{k}={v}" for k, v in cookies.items()])
+
         # Set up headers
         headers = {
-            'accept': 'text/html, */*; q=0.01',
+            'accept': 'application/json, text/plain, */*',
             'accept-language': 'zh-CN,zh;q=0.9',
-            'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'bx-v': '2.5.11',
+            'content-type': 'application/x-www-form-urlencoded',
+            'cookie': cookie_string,
             'origin': 'https://www.dianxiaomi.com',
-            'referer': 'https://www.dianxiaomi.com/order/index.htm?go=m1-1',
+            'referer': 'https://www.dianxiaomi.com/web/order/all',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36',
-            'x-requested-with': 'XMLHttpRequest'
+            'sec-ch-ua': '"Chromium";v="137", "Not.A/Brand";v="99"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-origin'
         }
-        
+
         # Set up data with defaults and provided content
         data = {
             'pageNo': '1',
@@ -82,38 +92,42 @@ def search_package(content, cookie_file_path):
             'behindTrack': '-1',
             'storageId': '0',
             'timeOut': '0',
-            'orderSearchType': '1'
+            'orderSearchType': '1',
+            'axios_cancelToken': 'true'
         }
-        
-        # Make the POST request
-        url = 'https://www.dianxiaomi.com/package/searchPackage.htm'
-        response = requests.post(url, headers=headers, cookies=cookies, data=data)
-        
-        # Parse the HTML response
-        soup = BeautifulSoup(response.text, 'html.parser')
-        
-        # Method 1: Find by data-packageNumber attribute
-        element = soup.find(attrs={"data-packageNumber": True})
-        if element:
-            return element['data-packageNumber']
-        
-        # Method 2: If not found, try using regex to find the pattern
-        package_match = re.search(r'data-packageNumber="([^"]+)"', response.text)
-        if package_match:
-            return package_match.group(1)
-            
-        # Method 3: If still not found, look for a specific pattern
-        if 'data-packageNumber' in response.text:
-            lines = response.text.split('\n')
-            for line in lines:
-                if 'data-packageNumber' in line:
-                    match = re.search(r'data-packageNumber="([^"]+)"', line)
-                    if match:
-                        return match.group(1)
-        
-        print("Package number not found in response")
+
+        # Make the POST request to new API
+        url = 'https://www.dianxiaomi.com/api/package/searchPackage.json'
+        response = requests.post(url, headers=headers, data=data)
+        response.raise_for_status()
+
+        # 解析JSON响应
+        result = response.json()
+
+        # 检查响应状态
+        if result.get('code') != 0:
+            print(f"API返回错误: {result.get('msg', '未知错误')}")
+            return None
+
+        # 提取包裹列表
+        package_list = result.get('data', {}).get('page', {}).get('list', [])
+
+        if package_list:
+            # 返回第一个包裹的包裹号
+            first_package = package_list[0]
+            package_number = first_package.get('packageNumber')
+            if package_number:
+                return package_number
+            else:
+                print("Package number not found in response")
+                return None
+        else:
+            print("No packages found in response")
+            return None
+
+    except json.JSONDecodeError as e:
+        print(f"JSON解析失败: {e}")
         return None
-        
     except Exception as e:
         print(f"Error: {e}")
         return None

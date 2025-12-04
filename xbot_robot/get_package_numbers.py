@@ -19,20 +19,20 @@ from typing import List, Optional
 def get_package_numbers(content: str, cookie_file_path: str) -> Optional[List[str]]:
     """
     搜索包裹并提取packageNumber
-    
+
     Args:
         content: 搜索内容 (例如: "6385553-1124")
         cookie_file_path: cookie JSON文件路径 (例如: "1.json")
-    
+
     Returns:
         提取到的packageNumber列表，失败时返回None
     """
-    
+
     # 加载cookies并转换格式
     try:
         with open(cookie_file_path, 'r', encoding='utf-8') as f:
             cookie_data = json.load(f)
-        
+
         # 转换cookie格式为requests可用的字典
         cookies = {}
         if 'cookies' in cookie_data:
@@ -41,31 +41,34 @@ def get_package_numbers(content: str, cookie_file_path: str) -> Optional[List[st
         else:
             # 如果是简单的键值对格式，直接使用
             cookies = cookie_data
-            
+
     except Exception as e:
         print(f"加载cookie文件失败: {e}")
         return None
-    
-    # 请求URL和配置
-    url = "https://www.dianxiaomi.com/package/searchPackage.htm"
-    
+
+    # 新的API URL
+    url = "https://www.dianxiaomi.com/api/package/searchPackage.json"
+
+    # 构建cookie字符串
+    cookie_string = '; '.join([f"{k}={v}" for k, v in cookies.items()])
+
     headers = {
-        'accept': 'text/html, */*; q=0.01',
+        'accept': 'application/json, text/plain, */*',
         'accept-language': 'zh-CN,zh;q=0.9',
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'bx-v': '2.5.11',
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': cookie_string,
         'origin': 'https://www.dianxiaomi.com',
-        'priority': 'u=1, i',
-        'referer': 'https://www.dianxiaomi.com/order/index.htm?go=m1-1',
+        'referer': 'https://www.dianxiaomi.com/web/order/all',
         'sec-ch-ua': '"Chromium";v="136", "Google Chrome";v="136", "Not.A/Brand";v="99"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': '"Windows"',
         'sec-fetch-dest': 'empty',
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-origin',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36',
-        'x-requested-with': 'XMLHttpRequest'
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36'
     }
-    
+
     data = {
         'pageNo': '1',
         'pageSize': '100',
@@ -99,20 +102,34 @@ def get_package_numbers(content: str, cookie_file_path: str) -> Optional[List[st
         'behindTrack': '-1',
         'storageId': '0',
         'timeOut': '0',
-        'orderSearchType': '1'
+        'orderSearchType': '1',
+        'axios_cancelToken': 'true'
     }
-    
+
     try:
         # 发送请求
-        response = requests.post(url, headers=headers, cookies=cookies, data=data)
+        response = requests.post(url, headers=headers, data=data)
         response.raise_for_status()
-        
-        # 提取packageNumber
-        pattern = r'data-packageNumber="([^"]+)"'
-        matches = re.findall(pattern, response.text)
-        
-        return matches if matches else []
-        
+
+        # 解析JSON响应
+        result = response.json()
+
+        # 检查响应状态
+        if result.get('code') != 0:
+            print(f"API返回错误: {result.get('msg', '未知错误')}")
+            return []
+
+        # 提取包裹列表
+        package_list = result.get('data', {}).get('page', {}).get('list', [])
+
+        # 提取所有packageNumber
+        package_numbers = [pkg.get('packageNumber') for pkg in package_list if pkg.get('packageNumber')]
+
+        return package_numbers if package_numbers else []
+
+    except json.JSONDecodeError as e:
+        print(f"JSON解析失败: {e}")
+        return None
     except Exception as e:
         print(f"请求失败: {e}")
         return None
