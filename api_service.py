@@ -25,6 +25,11 @@ DOWNLOAD_TIMEOUT = 30
 RETRY_TIMES = 3
 RETRY_DELAY = 2
 
+# 限流重试配置
+RATE_LIMIT_MAX_RETRIES = 10  # 限流重试次数
+RATE_LIMIT_DELAY = 1  # 限流重试延迟（秒）
+RATE_LIMIT_KEYWORDS = ["系统繁忙", "请稍后重试"]  # 限流关键词
+
 
 # ==================== Cookie管理 ====================
 class _CookieManager:
@@ -115,6 +120,54 @@ def _get_cookies():
     return _cookie_manager.get_cookies_dict()
 
 
+def _is_rate_limited(response_text: str) -> bool:
+    """检查响应是否为限流错误"""
+    for keyword in RATE_LIMIT_KEYWORDS:
+        if keyword in response_text:
+            return True
+    return False
+
+
+def _request_with_retry(method: str, url: str, **kwargs) -> requests.Response:
+    """
+    带限流重试的请求函数
+
+    Args:
+        method: 请求方法 ('get' 或 'post')
+        url: 请求URL
+        **kwargs: 传递给requests的其他参数
+
+    Returns:
+        requests.Response对象
+
+    Raises:
+        原始异常（如果重试后仍失败）
+    """
+    last_response = None
+
+    for attempt in range(RATE_LIMIT_MAX_RETRIES + 1):  # +1 包含首次请求
+        if method.lower() == 'get':
+            response = requests.get(url, **kwargs)
+        else:
+            response = requests.post(url, **kwargs)
+
+        # 检查是否为限流错误
+        if _is_rate_limited(response.text):
+            last_response = response
+            if attempt < RATE_LIMIT_MAX_RETRIES:
+                time.sleep(RATE_LIMIT_DELAY)
+                continue
+            else:
+                # 已达到最大重试次数，返回最后一次响应
+                return response
+
+        # 请求成功（非限流），直接返回
+        return response
+
+    # 不应该到达这里，但作为保险返回最后一次响应
+    return last_response if last_response else response
+
+
 # ==================== API函数 - 直接发送HTTP请求 ====================
 
 # 搜索类函数 (7个)
@@ -163,7 +216,7 @@ def search_dxm_product(search_value: str, shop_code: str, variant: str, debug: b
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -246,7 +299,7 @@ def search_dxm_product_all(search_value: str, shop_code: str, variant: str, debu
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -322,7 +375,7 @@ def search_package(content: str) -> Optional[str]:
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         tracking_matches = re.findall(r"doTrack\('([^']+)'", response.text)
         return tracking_matches[0] if tracking_matches else None
     except:
@@ -364,7 +417,7 @@ def search_package_ids(content: str) -> List[str]:
     }
 
     try:
-        response = requests.post(url, headers=headers, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, data=data, timeout=30)
         result = response.json()
 
         if result.get('code') != 0:
@@ -411,7 +464,7 @@ def search_package2(content: str) -> Optional[str]:
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         match = re.search(r'data-packageNumber="([^"]+)"', response.text)
         return match.group(1) if match else None
     except:
@@ -468,7 +521,7 @@ def get_package_numbers(content: str) -> Optional[List[str]]:
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         result = response.json()
 
         # 检查API返回状态
@@ -551,7 +604,7 @@ def get_dianxiaomi_order_id(content: str) -> List[Optional[str]]:
     }
 
     try:
-        response = requests.post(url, headers=headers, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, data=data, timeout=30)
         result = response.json()
 
         if result.get('code') != 0:
@@ -638,7 +691,7 @@ def add_product_to_dianxiaomi(name: str, name_en: str, price: str, url: str, cus
     }
 
     try:
-        response = requests.post(url_endpoint, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url_endpoint, headers=headers, cookies=cookies, data=data, timeout=30)
         return response.text
     except:
         return None
@@ -741,7 +794,7 @@ def add_product_sg_dxm(name: str, name_en: str, sku_code: str, sku: str, price: 
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=payload, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=payload, timeout=30)
         result = response.json()
         return {'success': True, 'message': result}
     except Exception as e:
@@ -782,7 +835,7 @@ def add_product_to_warehouse(sku: str) -> Optional[Dict[str, Any]]:
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         result = response.json()
         return result if result.get('ret') == '1' else None
     except:
@@ -838,7 +891,7 @@ def set_dianxiaomi_comment(package_ids: List[str]) -> Optional[Dict[str, Any]]:
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         return response.json()
     except:
         return None
@@ -883,7 +936,7 @@ def batch_commit_platform_packages(package_ids: List[str]) -> Optional[requests.
     }
 
     try:
-        response = requests.post(url, headers=headers, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, data=data, timeout=30)
         return response
     except:
         return None
@@ -928,7 +981,7 @@ def batch_set_voided(package_ids: List[str]) -> Optional[Dict[str, Any]]:
     }
 
     try:
-        response = requests.post(url, headers=headers, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, data=data, timeout=30)
         result = response.json()
 
         # 检查登录页面
@@ -983,7 +1036,7 @@ def update_dianxiaomi_warehouse(package_ids: List[str], storage_id: str) -> Opti
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         try:
             return response.json()
         except:
@@ -1033,7 +1086,7 @@ def update_dianxiaomi_provider_batch(package_ids: List[str], auth_id: str) -> Op
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         return response.json()
     except:
         return None
@@ -1074,7 +1127,7 @@ def get_supplier_ids(supplier_name: str) -> List[str]:
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         supplier_ids = []
@@ -1123,7 +1176,7 @@ def get_shop_dict_with_cookie() -> Dict[str, str]:
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         shop_dict = {}
@@ -1170,7 +1223,7 @@ def request_dianxiaomi_provider_auth() -> Dict[str, str]:
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         provider_dict = {}
@@ -1220,7 +1273,7 @@ def get_ail_link(product_url: str) -> Optional[str]:
     }
 
     try:
-        response = requests.post(url, headers=headers, cookies=cookies, data=data, timeout=30)
+        response = _request_with_retry('post', url, headers=headers, cookies=cookies, data=data, timeout=30)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         name_element = soup.find('td', class_='nameBox')
@@ -1255,7 +1308,7 @@ def fetch_sku_code() -> Optional[str]:
     }
 
     try:
-        response = requests.get(url, headers=headers, cookies=cookies, timeout=30)
+        response = _request_with_retry('get', url, headers=headers, cookies=cookies, timeout=30)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         sku_element = soup.find('span', id='skuCode')
@@ -1323,7 +1376,7 @@ def upload_excel_to_dianxiaomi(file_path: str) -> Optional[str]:
                 'excelTransformConfig': json.dumps(excel_config)
             }
 
-            response = requests.post(url, headers=headers, cookies=cookies, files=files, data=data, timeout=60)
+            response = _request_with_retry('post', url, headers=headers, cookies=cookies, files=files, data=data, timeout=60)
             result = response.json()
 
             if result.get('code') == 0 and result.get('msg') == 'Successful':
@@ -1419,7 +1472,7 @@ def run_scraper(days: int) -> List[Dict[str, Any]]:
         }
 
         try:
-            response = requests.post(url, headers=headers, data=data, timeout=30)
+            response = _request_with_retry('post', url, headers=headers, data=data, timeout=30)
             result = response.json()
 
             if result.get('code') == 0:
